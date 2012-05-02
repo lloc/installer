@@ -35,7 +35,7 @@ class Tasks {
                 chmod($root . $target, 0755);
             }
 
-            symlink($root . $path, $root . $target);
+            symlink($root . $target, $root . $path);
         }
     }
 
