@@ -64,7 +64,7 @@ class Tasks {
             }
 
             closedir($fp);
-            rmdir($file);
+            rmdir($dir);
         }
     }
 
