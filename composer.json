@@ -1,0 +1,10 @@
+{
+    "name": "wordpress/installer",
+    "description": "Wordpress composer installer.",
+    "autoload": {
+        "psr-0": { "WordpressInstaller":  "src/" }
+    },
+    "require": {
+        "php": "5.3.*"
+    }
+}
