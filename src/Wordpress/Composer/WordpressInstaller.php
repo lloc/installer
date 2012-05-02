@@ -15,11 +15,29 @@ class WordpressInstaller extends LibraryInstaller {
 
     public function getInstallPath(PackageInterface $package)
     {
-        $package->getPrettyName();
+        $pos = strpos($package->getPrettyName(), '/');
 
-        var_dump($package);
+        if ($pos)
+        {
+            $path = substr($package->getPrettyName(), $pos);
+        }
+        else
+        {
+            $path = $package->getPrettyName();
+        }
 
-        return 'vendor/'.$package->getPrettyName();
+        switch($package->getType())
+        {
+            case 'wordpress-core':
+                return 'public/'.$path;
+                break;
+            case 'wordpress-plugin':
+                return 'plugins/'.$path;
+                break;
+            case 'wordpress-theme':
+                return 'themes/'.$path;
+                break;
+        }
     }
 
     public function supports($type)
