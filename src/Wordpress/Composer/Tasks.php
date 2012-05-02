@@ -10,7 +10,7 @@ class Tasks {
     {
         $root = realpath(__DIR__ . '/../../../../../../');
 
-        if ($root === FALSE)
+        if ($root !== FALSE)
         {
             $root .= DIRECTORY_SEPARATOR;
         }
