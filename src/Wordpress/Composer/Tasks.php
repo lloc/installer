@@ -10,7 +10,7 @@ class Tasks {
     {
         $composer = $event->getComposer();
 
-        var_dump($composer);
+        var_dump($composer->getConfig());
     }
 
 }
