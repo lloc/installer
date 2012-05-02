@@ -8,9 +8,9 @@ class Tasks {
 
     public static function init(Event $event)
     {
-        $composer = $event->getComposer();
+        $root = __DIR__ . '/../../../../../../';
 
-        var_dump($composer->getConfig());
+        var_dump(realpath($root));
     }
 
 }
