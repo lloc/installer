@@ -1,7 +1,7 @@
 {
     "name": "wordpress/installer",
     "description": "Wordpress composer installer.",
-    "wordpress-installer",
+    "type": "wordpress-installer",
     "autoload": {
         "psr-0": { "Wordpress\\Composer":  "src/" }
     },
