@@ -28,6 +28,10 @@ class Tasks {
             {
                 self::rrmdir($root . $path);
             }
+            elseif (is_link($root . $path))
+            {
+                continue;
+            }
 
             if ( ! is_dir($root . $target))
             {

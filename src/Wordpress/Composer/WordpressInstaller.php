@@ -15,15 +15,12 @@ class WordpressInstaller extends LibraryInstaller {
 
     public function getInstallPath(PackageInterface $package)
     {
-        $pos = strpos($package->getPrettyName(), '/');
+        $path = $package->getPrettyName();
+        $pos = strpos($path, '/');
 
-        if ($pos)
+        if ($pos !== FALSE)
         {
-            $path = substr($package->getPrettyName(), $pos);
-        }
-        else
-        {
-            $path = $package->getPrettyName();
+            $path = substr($path, $pos);
         }
 
         switch($package->getType())
