@@ -2,6 +2,7 @@
 
 namespace Wordpress\Composer;
 
+use Symfony\Component\Process\Process;
 use Composer\Script\Event;
 
 class PhingTasks {
