@@ -8,6 +8,7 @@ class WordpressInstaller extends LibraryInstaller {
     protected $_types = array(
         'wordpress-plugin',
         'wordpress-theme',
+        'wordpress-core',
     );
 
     public function getInstallPath(PackageInterface $package)
@@ -23,6 +24,9 @@ class WordpressInstaller extends LibraryInstaller {
 
         switch($package->getType())
         {
+            case 'wordpress-core':
+                return 'wordpress/core/'.$path;
+                break;
             case 'wordpress-plugin':
                 return $wpContent . 'plugins/'.$path;
                 break;
