@@ -12,8 +12,9 @@ class WordpressInstaller extends LibraryInstaller {
 
     public function getInstallPath(PackageInterface $package)
     {
-        $path = $package->getPrettyName();
-        $pos = strpos($path, '/');
+        $wpContent = 'wordpress/wp-content/';
+        $path      = $package->getPrettyName();
+        $pos       = strpos($path, '/');
 
         if ($pos !== FALSE)
         {
@@ -22,14 +23,11 @@ class WordpressInstaller extends LibraryInstaller {
 
         switch($package->getType())
         {
-            case 'wordpress-core':
-                return 'public/'.$path;
-                break;
             case 'wordpress-plugin':
-                return 'plugins/'.$path;
+                return $wpContent . 'plugins/'.$path;
                 break;
             case 'wordpress-theme':
-                return 'themes/'.$path;
+                return $wpContent . 'themes/'.$path;
                 break;
         }
     }
