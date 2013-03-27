@@ -6,7 +6,7 @@ use Composer\Script\Event;
 
 class PhingTasks {
 
-    public static function(Event $e)
+    public static function postInstall(Event $e)
     {
         $io = $e->getIO();
 
@@ -22,4 +22,5 @@ class PhingTasks {
 
         $io->write($phingProcess->getOutput());
     }
+
 }
