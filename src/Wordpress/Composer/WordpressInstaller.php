@@ -39,12 +39,8 @@ class WordpressInstaller extends LibraryInstaller {
 
     public function supports($type)
     {
+        var_dump($type, $this->_types);
         return in_array($type, $this->_types);
-    }
-
-    public function install()
-    {
-        var_dump(func_get_args());
     }
 
 }
