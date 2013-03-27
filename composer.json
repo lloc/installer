@@ -10,8 +10,5 @@
     },
     "require": {
         "php": "5.3.*"
-    },
-    "scripts": {
-        "post-install-cmd": "Wordpress\\Composer\\Tasks::init"
     }
 }
