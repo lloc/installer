@@ -23,6 +23,8 @@ class WordpressInstaller extends LibraryInstaller {
             $path = substr($path, $pos);
         }
 
+        var_dump($package->getType());
+
         switch($package->getType())
         {
             case 'wordpress-core':
