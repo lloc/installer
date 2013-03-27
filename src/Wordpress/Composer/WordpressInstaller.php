@@ -23,8 +23,6 @@ class WordpressInstaller extends LibraryInstaller {
             $path = substr($path, $pos);
         }
 
-        var_dump($package->getType());
-
         switch($package->getType())
         {
             case 'wordpress-core':
@@ -42,6 +40,11 @@ class WordpressInstaller extends LibraryInstaller {
     public function supports($type)
     {
         return in_array($type, $this->_types);
+    }
+
+    public function install()
+    {
+        var_dump(func_get_args());
     }
 
 }
