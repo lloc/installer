@@ -24,4 +24,9 @@ class PhingTasks {
         $io->write($phingProcess->getOutput());
     }
 
+    public static function postUpdate(Event $e)
+    {
+        self::postInstall($e);
+    }
+
 }

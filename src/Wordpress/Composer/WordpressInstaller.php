@@ -25,7 +25,7 @@ class WordpressInstaller extends LibraryInstaller {
         switch($package->getType())
         {
             case 'wordpress-core':
-                return 'wordpress/core/'.$path;
+                return 'wordpress/'.$path;
                 break;
             case 'wordpress-plugin':
                 return $wpContent . 'plugins/'.$path;
