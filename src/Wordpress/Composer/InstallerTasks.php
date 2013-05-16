@@ -5,22 +5,23 @@ use Composer\Script\Event;
 class InstallerTasks {
 
     public static $params = array(
-        'wordpress-wp-contentdir' => 'wordpress/wp-content',
-        'wordpress-coredir'       => 'wordpress/core',
-        'wordpress-wp-config'     => array(
-            'site_url'  => 'http://localhost',
-            'db_host'   => 'localhost',
-            'db_name'   => 'wordpress',
-            'db_user'   => 'root',
-            'db_pass'   => '',
-            'db_charset' => 'utf8',
-            'db_collate' => '',
-            'db_prefix'  => 'wp_',
+        'wordpress_wp_contentdir' => 'wordpress/wp-content',
+        'wordpress_coredir'       => 'wordpress/core',
+        'wordpress_wp_config'     => array(
+            'site_url'           => 'http://localhost',
+            'db_host'            => 'localhost',
+            'db_name'            => 'wordpress',
+            'db_user'            => 'root',
+            'db_pass'            => '',
+            'db_charset'         => 'utf8',
+            'db_collate'         => '',
+            'db_prefix'          => 'wp_',
             'generate_auth_keys' => true,
-            'wp_lang'    => '',
-            'wp_debug'   => false,
+            'wp_lang'            => '',
+            'wp_debug'           => false,
             'disallow_file_edit' => false,
-            'wp_contenturl' => null,
+            'wp_contenturl'      => null,
+            'wp_content_dir'     => null,
         ),
     );
 
@@ -31,28 +32,28 @@ class InstallerTasks {
 
         if (is_array($extra))
         {
-            $params['wordpress-coredir'] = (isset($extra['wordpress-coredir']))
-                ? $extra['wordpress-coredir']
-                : $params['wordpress-coredir'];
+            $params['wordpress_coredir'] = (isset($extra['wordpress_coredir']))
+                ? $extra['wordpress_coredir']
+                : $params['wordpress_coredir'];
 
-            $params['wordpress-wp-contentdir'] = (isset($extra['wordpress-wp-contentdir']))
-                ? $extra['wordpress-wp-contentdir']
-                : $params['wordpress-wp-contentdir'];
+            $params['wordpress_wp_contentdir'] = (isset($extra['wordpress_wp_contentdir']))
+                ? $extra['wordpress_wp_contentdir']
+                : $params['wordpress_wp_contentdir'];
 
-            if (isset($extra['wordpress-wp-config']))
+            if (isset($extra['wordpress_wp_config']))
             {
-                $params['wordpress-wp-config'] = array_merge(
-                    self::$params['wordpress-wp-config'],
-                    $extra['wordpress-wp-config']
+                $params['wordpress_wp_config'] = array_merge(
+                    self::$params['wordpress_wp_config'],
+                    $extra['wordpress_wp_config']
                 );
             }
         }
 
-        $wpContentUrl = (is_null($params['wordpress-wp-config']['wp_contenturl']))
-            ? (rtrim($params['wordpress-wp-config']['site_url'], '/') . '/wp-content')
-            : $params['wordpress-wp-config']['wp_contenturl'];
+        $wpContentUrl = (is_null($params['wordpress_wp_config']['wp_contenturl']))
+            ? (rtrim($params['wordpress_wp_config']['site_url'], '/') . '/wp-content')
+            : $params['wordpress_wp_config']['wp_contenturl'];
 
-        if (true === $params['wordpress-wp-config']['generate_auth_keys'])
+        if (true === $params['wordpress_wp_config']['generate_auth_keys'])
         {
             $authKeys = file_get_contents('https://api.wordpress.org/secret-key/1.1/salt/');
         }
@@ -68,9 +69,9 @@ class InstallerTasks {
                 . "define('NONCE_SALT',       'put your unique phrase here');\n";
         }
 
-        if (isset($params['wordpress-wp-config']['content-dir']))
+        if ( ! is_null($params['wordpress_wp_config']['wp_content_dir']))
         {
-            $wpConfigContentDir = $params['wordpress-wp-config']['content-dir'];
+            $wpConfigContentDir = $params['wordpress_wp_config']['wp_content_dir'];
         }
         else
         {
@@ -79,17 +80,17 @@ class InstallerTasks {
 
         $wpConfigParams = array(
             ':wp_content_dir'          => $wpConfigContentDir,
-            ':site_url'                => $params['wordpress-wp-config']['site_url'],
-            ':db_host'                 => $params['wordpress-wp-config']['db_host'],
-            ':db_name'                 => $params['wordpress-wp-config']['db_name'],
-            ':db_user'                 => $params['wordpress-wp-config']['db_user'],
-            ':db_pass'                 => $params['wordpress-wp-config']['db_pass'],
-            ':db_charset'              => $params['wordpress-wp-config']['db_charset'],
-            ':db_collate'              => $params['wordpress-wp-config']['db_collate'],
-            ':db_prefix'               => $params['wordpress-wp-config']['db_prefix'],
-            ':wp_lang'                 => $params['wordpress-wp-config']['wp_lang'],
-            ':wp_debug'                => (false !== $params['wordpress-wp-config']['wp_debug']) ? 'true' : 'false',
-            ':disallow_file_edit'      => (false !== $params['wordpress-wp-config']['disallow_file_edit']) ? 'true' : 'false',
+            ':site_url'                => $params['wordpress_wp_config']['site_url'],
+            ':db_host'                 => $params['wordpress_wp_config']['db_host'],
+            ':db_name'                 => $params['wordpress_wp_config']['db_name'],
+            ':db_user'                 => $params['wordpress_wp_config']['db_user'],
+            ':db_pass'                 => $params['wordpress_wp_config']['db_pass'],
+            ':db_charset'              => $params['wordpress_wp_config']['db_charset'],
+            ':db_collate'              => $params['wordpress_wp_config']['db_collate'],
+            ':db_prefix'               => $params['wordpress_wp_config']['db_prefix'],
+            ':wp_lang'                 => $params['wordpress_wp_config']['wp_lang'],
+            ':wp_debug'                => (false !== $params['wordpress_wp_config']['wp_debug']) ? 'true' : 'false',
+            ':disallow_file_edit'      => (false !== $params['wordpress_wp_config']['disallow_file_edit']) ? 'true' : 'false',
             ':wp_content_url'          => $wpContentUrl,
             ':auth_keys'               => $authKeys,
         );
@@ -102,7 +103,7 @@ class InstallerTasks {
             $wpConfig
         );
 
-        file_put_contents($wpConfigParams[':wordpress-coredir'] . '/wp-config.php', $wpConfig);
+        file_put_contents($wpConfigParams[':wordpress_coredir'] . '/wp-config.php', $wpConfig);
     }
 
 }
