@@ -73,9 +73,9 @@ define('WPLANG', ':wp_lang');
  */
 define('WP_DEBUG', :wp_debug);
 
-define('WP_CONTENT_DIR', realpath(__DIR__ . '/wp-content'));
-define('WP_PLUGIN_DIR', realpath(__DIR__ . '/wp-content/plugins'));
-define('PLUGINDIR', realpath(__DIR__ . '/wp-content/plugins'));
+define('WP_CONTENT_DIR', realpath(':wp_content_dir'));
+define('WP_PLUGIN_DIR', realpath(':wp_content_dir') . '/plugins');
+define('PLUGINDIR', realpath(':wp_content_dir') . '/plugins');
 define('WP_SITEURL', ':site_url');
 define('WP_HOME', ':site_url');
 define('WP_CONTENT_URL', ':wp_content_url');

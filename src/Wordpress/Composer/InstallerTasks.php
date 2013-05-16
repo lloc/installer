@@ -68,9 +68,17 @@ class InstallerTasks {
                 . "define('NONCE_SALT',       'put your unique phrase here');\n";
         }
 
+        if (isset($params['wordpress-wp-config']['content-dir']))
+        {
+            $wpConfigContentDir = $params['wordpress-wp-config']['content-dir'];
+        }
+        else
+        {
+            $wpConfigContentDir = '__DIR__ . \'/wp-content\'';
+        }
+
         $wpConfigParams = array(
-            ':wordpress-coredir'       => realpath($params['wordpress-coredir']),
-            ':wordpress-wp-contentdir' => realpath($params['wordpress-wp-contentdir']),
+            ':wp_content_dir'          => $wpConfigContentDir,
             ':site_url'                => $params['wordpress-wp-config']['site_url'],
             ':db_host'                 => $params['wordpress-wp-config']['db_host'],
             ':db_name'                 => $params['wordpress-wp-config']['db_name'],
