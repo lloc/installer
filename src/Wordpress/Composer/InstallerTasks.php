@@ -71,7 +71,7 @@ class InstallerTasks {
 
         if ( ! is_null($params['wordpress_wp_config']['wp_content_dir']))
         {
-            $wpConfigContentDir = $params['wordpress_wp_config']['wp_content_dir'];
+            $wpConfigContentDir = "'" . $params['wordpress_wp_config']['wp_content_dir'] . "'";
         }
         else
         {
@@ -103,7 +103,7 @@ class InstallerTasks {
             $wpConfig
         );
 
-        file_put_contents($wpConfigParams[':wordpress_coredir'] . '/wp-config.php', $wpConfig);
+        file_put_contents($params['wordpress_coredir'] . '/wp-config.php', $wpConfig);
     }
 
 }
