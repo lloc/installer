@@ -2,6 +2,12 @@
     "name": "wordpress/installer",
     "description": "Wordpress composer installer.",
     "type": "composer-installer",
+    "authors": [
+        {
+            "name": "Brian Greenacre",
+            "email": "bgreenacre42@gmail.com"
+        }
+    ],
     "autoload": {
         "psr-0": { "Wordpress\\Composer":  "src/" }
     },

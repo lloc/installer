@@ -1,9 +1,32 @@
 <?php namespace Wordpress\Composer;
+/**
+ * Wordpress Composer Installer
+ *
+ * @package Wordpress/Composer;
+ * @subpackage Installer
+ * @category Installer
+ * @author Brian Greenacre <bgreenacre42@gmail.com>
+ * @version $id$
+ */
 
 use Composer\Script\Event;
 
+/**
+ * Provides a number of tasks that can be done
+ * after a composer event is fired.
+ *
+ * @package Wordpress/Composer
+ * @subpackage Tasks
+ * @category Tasks
+ */
 class InstallerTasks {
 
+    /**
+     * Array of default config values.
+     *
+     * @access public
+     * @var array
+     */
     public static $params = array(
         'wordpress_wp_contentdir' => 'wordpress/wp-content',
         'wordpress_coredir'       => 'wordpress/core',
@@ -25,10 +48,20 @@ class InstallerTasks {
         ),
     );
 
+    /**
+     * Generate a wp-config.php and place it into
+     * the wordpress core folder.
+     *
+     * @access public
+     * @param  Event  $event Event object
+     * @return void
+     */
     public static function wpConfig(Event $event)
     {
+        // Get the params from the class and merge
+        // any defined inside composer.json file.
         $params = self::$params;
-        $extra = $event->getComposer()->getPackage()->getExtra();
+        $extra  = $event->getComposer()->getPackage()->getExtra();
 
         if (is_array($extra))
         {
@@ -49,10 +82,12 @@ class InstallerTasks {
             }
         }
 
+        // Set the wp content url
         $wpContentUrl = (is_null($params['wordpress_wp_config']['wp_contenturl']))
             ? (rtrim($params['wordpress_wp_config']['site_url'], '/') . '/wp-content')
             : $params['wordpress_wp_config']['wp_contenturl'];
 
+        // Generate the auth salts or use default values.
         if (true === $params['wordpress_wp_config']['generate_auth_keys'])
         {
             $authKeys = file_get_contents('https://api.wordpress.org/secret-key/1.1/salt/');
@@ -69,6 +104,7 @@ class InstallerTasks {
                 . "define('NONCE_SALT',       'put your unique phrase here');\n";
         }
 
+        // Set the wp content directory.
         if ( ! is_null($params['wordpress_wp_config']['wp_content_dir']))
         {
             $wpConfigContentDir = "'" . $params['wordpress_wp_config']['wp_content_dir'] . "'";
@@ -95,14 +131,17 @@ class InstallerTasks {
             ':auth_keys'               => $authKeys,
         );
 
+        // Get the wp-config template file content.
         $wpConfig = file_get_contents(__DIR__ . '/../../../templates/wp-config.php-dist');
 
+        // Replace tokens with values.
         $wpConfig = str_replace(
             array_keys($wpConfigParams),
             $wpConfigParams,
             $wpConfig
         );
 
+        // Write the wp-config.php file.
         file_put_contents($params['wordpress_coredir'] . '/wp-config.php', $wpConfig);
     }
 
