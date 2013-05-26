@@ -62,14 +62,14 @@ class WordpressInstaller extends LibraryInstaller {
         {
             $extra = $this->composer->getPackage()->getExtra();
 
-            if ( ! empty($extra['wordpress-coredir']))
+            if ( ! empty($extra['wordpress_coredir']))
             {
-                $wpCorePath = rtrim($extra['wordpress-coredir'], '/');
+                $wpCorePath = rtrim($extra['wordpress_coredir'], '/');
             }
 
-            if ( ! empty($extra['wordpress-wp-contentdir']))
+            if ( ! empty($extra['wordpress_wp_contentdir']))
             {
-                $wpContentPath = rtrim($extra['wordpress-wp-contentdir'], '/');
+                $wpContentPath = rtrim($extra['wordpress_wp_contentdir'], '/');
             }
         }
 
