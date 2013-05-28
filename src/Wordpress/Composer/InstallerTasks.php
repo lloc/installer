@@ -130,7 +130,7 @@ class InstallerTasks {
             ':disallow_file_edit'      => (false !== $params['wordpress_wp_config']['disallow_file_edit']) ? 'true' : 'false',
             ':wp_content_url'          => $wpContentUrl,
             ':auth_keys'               => $authKeys,
-            ':vendor-dir'              => $event->getComposer()->getConfig()->get('vendor-dir'),
+            ':vendor_dir'              => $event->getComposer()->getConfig()->get('vendor-dir'),
         );
 
         // Get the wp-config template file content.

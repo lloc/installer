@@ -82,9 +82,9 @@ define('WP_CONTENT_URL', ':wp_content_url');
 define('WP_PLUGIN_URL', ':wp_content_url/plugins');
 define('DISALLOW_FILE_EDIT', :disallow_file_edit);
 
-if (is_file(':vendor_dir/autoload.php'))
+if (is_file(__DIR__ . '/../../../:vendor_dir/autoload.php'))
 {
-    include_once ':vendor_dir/autoload.php';
+    include_once __DIR__ . '/../../../:vendor_dir/autoload.php';
 }
 
 /* That's all, stop editing! Happy blogging. */
