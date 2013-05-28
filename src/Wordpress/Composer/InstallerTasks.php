@@ -30,6 +30,7 @@ class InstallerTasks {
     public static $params = array(
         'wordpress_wp_contentdir' => 'wordpress/wp-content',
         'wordpress_coredir'       => 'wordpress/core',
+        'vendor-dir'              => null,
         'wordpress_wp_config'     => array(
             'site_url'           => 'http://localhost',
             'db_host'            => 'localhost',
@@ -129,6 +130,7 @@ class InstallerTasks {
             ':disallow_file_edit'      => (false !== $params['wordpress_wp_config']['disallow_file_edit']) ? 'true' : 'false',
             ':wp_content_url'          => $wpContentUrl,
             ':auth_keys'               => $authKeys,
+            ':vendor-dir'              => $event->getComposer()->getConfig()->get('vendor-dir'),
         );
 
         // Get the wp-config template file content.
