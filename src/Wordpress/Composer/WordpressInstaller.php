@@ -80,11 +80,11 @@ class WordpressInstaller extends LibraryInstaller {
 
                 break;
             case 'wordpress-plugin':
-                $installPath = $wpContentPath . '/plugins/' . $path;
+                $installPath = $wpContentPath . '/plugins/' . trim($path, '/');
 
                 break;
             case 'wordpress-theme':
-                $installPath = $wpContentPath . '/themes/' . $path;
+                $installPath = $wpContentPath . '/themes/' . trim($path, '/');
                 
                 break;
         }
