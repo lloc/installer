@@ -133,18 +133,22 @@ class InstallerTasks {
             ':vendor_dir'              => $event->getComposer()->getConfig()->get('vendor-dir'),
         );
 
-        // Get the wp-config template file content.
-        $wpConfig = file_get_contents(__DIR__ . '/../../../templates/wp-config.php-dist');
-
-        // Replace tokens with values.
-        $wpConfig = str_replace(
-            array_keys($wpConfigParams),
-            $wpConfigParams,
-            $wpConfig
-        );
-
-        // Write the wp-config.php file.
-        file_put_contents($params['wordpress_coredir'] . '/wp-config.php', $wpConfig);
-    }
+        $templatePath = realpath(__DIR__ . '/../../../templates/wp-config.php-dist');
+        if ( $templatePath )
+        {
+	        // Get the wp-config template file content.
+	        $wpConfig = file_get_contents($templatePath);
+	
+	        // Replace tokens with values.
+	        $wpConfig = str_replace(
+	            array_keys($wpConfigParams),
+	            $wpConfigParams,
+	            $wpConfig
+	        );
+	
+	        // Write the wp-config.php file.
+	        file_put_contents($params['wordpress_coredir'] . '/wp-config.php', $wpConfig);
+        }
+	}
 
 }
